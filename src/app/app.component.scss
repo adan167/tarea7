@@ -1,0 +1,330 @@
+﻿:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #0c244d;
+  background: linear-gradient(135deg, #eaf2ff 0%, #f8fafc 35%, #edf6ff 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.pwa-card {
+  width: min(100%, 960px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-mark {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0033a0 0%, #0f59d9 100%);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+}
+
+.status {
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.84rem;
+}
+
+.status.connected {
+  background: #dff7e8;
+  color: #0f8a52;
+}
+
+.status.disconnected {
+  background: #ffe5e5;
+  color: #c62828;
+}
+
+.catalogo,
+.mensaje-panel,
+.pendientes {
+  margin-top: 1.5rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1.25rem;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.producto {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.producto:last-child {
+  border-bottom: none;
+}
+
+.producto-info h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+}
+
+.producto-info p {
+  margin: 0;
+  color: #64748b;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.acciones strong {
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.cantidad-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dbe5f1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.cantidad-control button {
+  border: none;
+  background: transparent;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.cantidad-control span {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.primary {
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #0033a0 0%, #0057ff 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px rgba(0, 83, 255, 0.18);
+}
+
+.primary:hover {
+  transform: translateY(-1px);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 90px;
+  border: 1px solid #d9e2ec;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background: white;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.85rem;
+}
+
+.estado-mensaje {
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: #edf8ff;
+  color: #0b4a6b;
+  font-weight: 600;
+}
+
+.pendientes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.pendientes li {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pendiente-item {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0.9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+}
+
+.pendientes small {
+  color: #64748b;
+}
+
+.empty-state {
+  margin: 0;
+  color: #64748b;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.detalle-pedido {
+  width: min(100%, 520px);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.18);
+}
+
+.detalle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.detalle-pedido h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.close-button {
+  border: none;
+  background: #eef2ff;
+  color: #1e3a8a;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.detalle-label {
+  margin: 0.8rem 0 0.2rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.detalle-valor {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.mensaje-valor {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 700px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .pwa-card {
+    padding: 1rem;
+  }
+
+  .header,
+  .producto {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .acciones {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

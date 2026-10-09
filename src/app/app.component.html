@@ -1,0 +1,103 @@
+﻿<div class="app-shell">
+  <div class="pwa-card">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-mark">B</span>
+        <h1>Backus Ventas PWA</h1>
+      </div>
+      <div class="status" [class.connected]="online" [class.disconnected]="!online">
+        {{ online ? '🟢 CONECTADO' : '🔴 SIN CONEXIÓN' }}
+      </div>
+    </header>
+
+    <section class="catalogo">
+      <h2>Catálogo</h2>
+
+      @for (producto of catalogo; track producto.id) {
+        <article class="producto">
+          <div class="producto-info">
+            <h3>{{ producto.producto }}</h3>
+            <p>{{ producto.categoria }}</p>
+          </div>
+
+          <div class="acciones">
+            <strong>S/ {{ producto.precio | number: '1.2-2' }}</strong>
+
+            <div class="cantidad-control" aria-label="Cantidad del producto">
+              <button type="button" (click)="actualizarCantidad(producto.id, -1)">-</button>
+              <span>{{ obtenerCantidad(producto.id) }}</span>
+              <button type="button" (click)="actualizarCantidad(producto.id, 1)">+</button>
+            </div>
+
+            <button type="button" class="primary" (click)="registrarPedido(producto)">
+              Registrar pedido
+            </button>
+          </div>
+        </article>
+      }
+    </section>
+
+    <section class="mensaje-panel">
+      <label for="mensaje">Mensaje del vendedor</label>
+      <textarea
+        id="mensaje"
+        rows="4"
+        [(ngModel)]="mensaje"
+        placeholder="Escribe un mensaje para enviar o guardar localmente..."
+      ></textarea>
+
+      <div class="message-actions">
+        <button type="button" class="primary" (click)="guardarMensaje()">Guardar</button>
+      </div>
+
+      @if (estadoMensaje) {
+        <p class="estado-mensaje">{{ estadoMensaje }}</p>
+      }
+    </section>
+
+    <section class="pendientes">
+      <h2>Pedidos pendientes</h2>
+
+      @if (pedidosPendientes.length) {
+        <ul>
+          @for (pedido of pedidosPendientes; track pedido.id) {
+            <li>
+              <button type="button" class="pendiente-item" (click)="verDetallePedido(pedido)">
+                <span>{{ pedido.tipo === 'pedido' ? (pedido.producto ?? 'Pedido') : 'Mensaje' }}</span>
+                <small>{{ pedido.fecha | date: 'short' }} · {{ pedido.estado }}</small>
+              </button>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty-state">No hay pedidos pendientes.</p>
+      }
+    </section>
+
+    @if (pedidoSeleccionado) {
+      <div class="modal-backdrop" (click)="cerrarDetallePedido()">
+        <section class="detalle-pedido" (click)="$event.stopPropagation()">
+          <div class="detalle-header">
+            <h2>Detalle del pedido pendiente</h2>
+            <button type="button" class="close-button" (click)="cerrarDetallePedido()">×</button>
+          </div>
+
+          @if (pedidoSeleccionado.tipo === 'mensaje') {
+            <p class="detalle-label">Mensaje guardado</p>
+            <p class="detalle-valor mensaje-valor">{{ pedidoSeleccionado.mensaje }}</p>
+          } @else {
+            <p class="detalle-label">Producto:</p>
+            <p class="detalle-valor">{{ pedidoSeleccionado.producto }}</p>
+            <p class="detalle-label">Cantidad:</p>
+            <p class="detalle-valor">{{ pedidoSeleccionado.cantidad }}</p>
+            <p class="detalle-label">Total:</p>
+            <p class="detalle-valor">S/ {{ pedidoSeleccionado.total | number: '1.2-2' }}</p>
+          }
+
+          <p class="detalle-label">Fecha:</p>
+          <p class="detalle-valor">{{ pedidoSeleccionado.fecha | date: 'medium' }}</p>
+        </section>
+      </div>
+    }
+  </div>
+</div>
